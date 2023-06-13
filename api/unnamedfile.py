@@ -63,18 +63,12 @@ You will answer concisely with 2-3 short bullet points, for only the two questio
         },
         user_message,
     ],
-<<<<<<< Updated upstream
-    "Plan" : [
-        {"role": "system", "content" : """You are ActGPT, given a topic you will give 3-4 activities that my students can undertake. I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. If the materials are not provided, assume only basic classroom stationery is present. Answer in concise bullet points. STRICTLY ONLY provide answer and no accompanying text"""},
-        user_message
-=======
     "Plan": [
         {
             "role": "system",
             "content": """You are ActGPT, given a topic you will give 3-4 activities that my students can undertake. I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. If the materials are not provided, assume only basic classroom stationery is present. Answer in concise bullet points.""",
         },
         user_message,
->>>>>>> Stashed changes
     ],
     "Apply": [
         {
@@ -104,38 +98,10 @@ What skills did I use?
 What important points did I learn?
 What else would I like to learn about this topic or related topics?
 How well did I organize my learning?
-<<<<<<< Updated upstream
-How could I improve my learning next time?"""},
-        user_message
-    ],
-
-    "Assessment" : [
-        {"role" : "system", "content" : """You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
- You will be given a topic for a lesson and must generate the following:
-
-1. Educator assessment: This component is focused on how the teacher will assess what the students have learned.
-This might involve quizzes, rubrics, or other forms of summative end-of-lesson assessments. For example, if the topic is the human skeleton,
-the educator might ask the students to take a quiz on the different bones in the body. ANSWER in concise bullet points, DO NOT include accompanying text."""},
-    user_message
-    ],
-    "Improvement" : [
-        {"role" : "system", "content" : """You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
-You will be given a topic for a lesson and must generate the following:
-
-1. Educator reflection: This component encourages the teacher to reflect on the content of the lesson,
-whether it was at the right level, whether there were any issues, and whether the pacing was appropriate.
-It also encourages the teacher to reflect on whether there was enough differentiation for students with different learning needs.
-
-ANSWER in concise bullet points, DO NOT include accompanying text."""},
-    user_message
-    ]
-
-=======
 How could I improve my learning next time?""",
         },
         user_message,
     ],
->>>>>>> Stashed changes
 }
 
 for k in all_primers.keys():
@@ -151,17 +117,17 @@ for k in all_primers.keys():
 
     print(f"Done with query {counter}")
 
-    if k == 'Plan':
-        #Dealing with the invesitgate
+    if k == "Plan":
+        # Dealing with the invesitgate
         k = "Investigate"
 
-        user_message_inv = {"role" : "user", "content" : f"Here are the activities {rp}"}
+        user_message_inv = {"role": "user", "content": f"Here are the activities {rp}"}
 
         messages_inv = [inv[0], user_message_inv]
 
         response = openai.ChatCompletion.create(
-           model = "gpt-3.5-turbo",
-            messages = messages_inv,
+            model="gpt-3.5-turbo",
+            messages=messages_inv,
         )
 
         rp = response["choices"][0]["message"]["content"]
@@ -174,20 +140,9 @@ for k in all_primers.keys():
 respars = ResponseParser(responses)
 final_response = respars.parse()
 
-<<<<<<< Updated upstream
-
-with open("./lesson_plan.text", "w") as f:
-    for k, v in final_response.items():
-        f.write(f"-----------------------------------------{k}-----------------------------------------")
-        f.write("\n")
-        f.write(v)
-        f.write("\n")
-
-=======
 # with open("./lesson_plan.text", "w") as f:
 #     for res, k in zip(responses, all_primers.keys()):
 #         f.write(f"-----------------------------------------{k}-----------------------------------------")
 #         f.write("\n")
 #         f.write(res)
 #         f.write("\n")
->>>>>>> Stashed changes
