@@ -34,7 +34,6 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>Lesson plan generator</p>
         <input type='text' value={inputValue} onChange={handleInputChange} />
         <button onClick={handleSubmit}>Generate plan</button>
