@@ -1,11 +1,6 @@
 import openai
 import os
 from flask_restful import Resource, Api, reqparse
-from dotenv import load_dotenv
-
-doten_path = '/path/to/.env'
-
-load_dotenv(doten_path)
 
 api_key = os.environ.get("OPENAI_API_KEY")
 print(api_key)
