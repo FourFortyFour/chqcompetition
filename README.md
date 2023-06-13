@@ -1,2 +1,2 @@
-# Digital School X CHQ Competition Brief
+# Digital School X CHQ Competition
 

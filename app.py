@@ -1,18 +1,22 @@
-from flask import Flask
+from flask import Flask, send_from_directory
+from flask_restful import Api, Resource, reqparse
+from flask_cors import CORS
 from api import querygpt
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+CORS(app)
+api = Api(app)
 
+@app.route("/", defaults={'path':''})
+def serve(path):
+    return send_from_directory(app.static_folder,'index.html')
 
-@app.route("/")
-def init():
-    shawarma()
-    return "<p>Made with ❤️ by </p>"
+api.add_resource(querygpt.ApiHandler, "/querygpt")
 
-
-def shawarma():
-    print(
-        querygpt.gen_assess_and_reflection(
-            "The topic is thermodynamics, how can you help me?"
-        )
-    )
+# def shawarma():
+#     # print(
+#     #     querygpt.gen_assess_and_reflection(
+#     #         "The topic is thermodynamics, how can you help me?"
+#     #     )
+#     # )
+#     return "super helpful response"
