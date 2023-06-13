@@ -1,0 +1,22 @@
+.vocabulary-container {
+    text-align: center;
+  }
+  
+  .vocabulary-title {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .vocabulary-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  #key-vocabulary li {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
