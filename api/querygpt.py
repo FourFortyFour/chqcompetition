@@ -21,25 +21,22 @@ It also encourages the teacher to reflect on whether there was enough differenti
 
 class ApiHandler(Resource):
     def get(self):
-        return {"resultStatus": "SUCCESS", "message": "Welcome to the API"}
+        return {
+            "resultStatus": "SUCCESS",
+            "message": "",
+        }
 
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument(
             "query", required=True, type=str, help="query cannot be blank"
         )
-        parser.add_argument("response", type=str)
+        # parser.add_argument("response", type=str)
 
         args = parser.parse_args()
-        request_type = args["type"]
-        request_json = args["response"]
-
-        ret_msg = request_json
-        if ret_msg:
-            query = "{}".format(ret_msg)
-        else:
-            query = "No input provided"
-
+        query = args["query"]
+        # request_json = args["response"]
+        # ret_msg = request_json
         final_respone = {
             "resultStatus": "SUCCESS",
             "message": query,
