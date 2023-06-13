@@ -2,11 +2,7 @@ import openai
 import os
 from flask_restful import Resource, Api, reqparse
 
-# api_key = os.environ.get("OPENAI_API_KEY")
-# api_key = "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"
-# api_key="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"
-api_key = "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"
-# openai.api_key = api_key
+api_key = os.environ.get("OPENAI_API_KEY")
 print(api_key)
 
 ALIGNMENT_STR = """
@@ -22,20 +18,21 @@ whether it was at the right level, whether there were any issues, and whether th
 It also encourages the teacher to reflect on whether there was enough differentiation for students with different learning needs.
 """
 
+
 class ApiHandler(Resource):
     def get(self):
-        return {
-            'resultStatus' : 'SUCCESS',
-            'message': 'Welcome to the API'
-        }
+        return {"resultStatus": "SUCCESS", "message": "Welcome to the API"}
+
     def post(self):
         parser = reqparse.RequestParser()
-        parser.add_argument('query', required=True, type=str, help='query cannot be blank')
-        parser.add_argument('response', type=str)
+        parser.add_argument(
+            "query", required=True, type=str, help="query cannot be blank"
+        )
+        parser.add_argument("response", type=str)
 
         args = parser.parse_args()
-        request_type = args['type']
-        request_json = args['response']
+        request_type = args["type"]
+        request_json = args["response"]
 
         ret_msg = request_json
         if ret_msg:
@@ -44,9 +41,9 @@ class ApiHandler(Resource):
             query = "No input provided"
 
         final_respone = {
-            'resultStatus' : 'SUCCESS',
-            'message': query,
-            'response': gen_assess_and_reflection(query)
+            "resultStatus": "SUCCESS",
+            "message": query,
+            "response": gen_assess_and_reflection(query),
         }
         return final_respone
 
@@ -70,4 +67,4 @@ def gen_assess_and_reflection(query: str) -> list[str]:
     generated_texts = [
         choice.message["content"].strip() for choice in response["choices"]
     ]
-    return "Insanely helpful response"
+    return generated_texts
