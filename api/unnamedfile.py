@@ -63,9 +63,12 @@ You will answer concisely with 2-3 short bullet points, for only the two questio
         },
         user_message,
     ],
-    "Plan" : [
-        {"role": "system", "content" : """You are ActGPT, given a topic you will give 3-4 activities that my students can undertake. I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. If the materials are not provided, assume only basic classroom stationery is present. Answer in concise bullet points. STRICTLY ONLY provide answer and no accompanying text"""},
-        user_message
+    "Plan": [
+        {
+            "role": "system",
+            "content": """You are ActGPT, given a topic you will give 3-4 activities that my students can undertake. I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. If the materials are not provided, assume only basic classroom stationery is present. Answer in concise bullet points.""",
+        },
+        user_message,
     ],
     "Apply": [
         {
@@ -119,6 +122,7 @@ It also encourages the teacher to reflect on whether there was enough differenti
 ANSWER in concise bullet points, DO NOT include accompanying text."""},
     user_message
     ]
+
 }
 
 inv = {"role" : "system", 
@@ -138,17 +142,17 @@ for k in all_primers.keys() :
 
     print(f"Done with query {counter}")
 
-    if k == 'Plan':
-        #Dealing with the invesitgate
+    if k == "Plan":
+        # Dealing with the invesitgate
         k = "Investigate"
 
-        user_message_inv = {"role" : "user", "content" : f"Here are the activities {rp}"}
+        user_message_inv = {"role": "user", "content": f"Here are the activities {rp}"}
 
         messages_inv = [inv[0], user_message_inv]
 
         response = openai.ChatCompletion.create(
-           model = "gpt-3.5-turbo",
-            messages = messages_inv,
+            model="gpt-3.5-turbo",
+            messages=messages_inv,
         )
 
         rp = response["choices"][0]["message"]["content"]
