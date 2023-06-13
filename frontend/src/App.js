@@ -16,6 +16,7 @@ function App() {
       .then(response => {
         console.log("SUCCESS", response)
         setGetMessage(response)
+        setInputValue("")
       }).catch(error => {
         console.log(error)
       });

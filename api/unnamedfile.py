@@ -98,38 +98,46 @@ What skills did I use?
 What important points did I learn?
 What else would I like to learn about this topic or related topics?
 How well did I organize my learning?
-How could I improve my learning next time?"""},
-        user_message
+How could I improve my learning next time?""",
+        },
+        user_message,
     ],
-
-    "Assessment" : [
-        {"role" : "system", "content" : """You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
+    "Assessment": [
+        {
+            "role": "system",
+            "content": """You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
  You will be given a topic for a lesson and must generate the following:
 
 1. Educator assessment: This component is focused on how the teacher will assess what the students have learned.
 This might involve quizzes, rubrics, or other forms of summative end-of-lesson assessments. For example, if the topic is the human skeleton,
-the educator might ask the students to take a quiz on the different bones in the body. ANSWER in concise bullet points, DO NOT include accompanying text."""},
-    user_message
+the educator might ask the students to take a quiz on the different bones in the body. ANSWER in concise bullet points, DO NOT include accompanying text.""",
+        },
+        user_message,
     ],
-    "Improvement" : [
-        {"role" : "system", "content" : """You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
+    "Improvement": [
+        {
+            "role": "system",
+            "content": """You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
 You will be given a topic for a lesson and must generate the following:
 
 1. Educator reflection: This component encourages the teacher to reflect on the content of the lesson,
 whether it was at the right level, whether there were any issues, and whether the pacing was appropriate.
 It also encourages the teacher to reflect on whether there was enough differentiation for students with different learning needs.
 
-ANSWER in concise bullet points, DO NOT include accompanying text."""},
-    user_message
-    ]
-
+ANSWER in concise bullet points, DO NOT include accompanying text.""",
+        },
+        user_message,
+    ],
 }
 
-inv = {"role" : "system", 
-       "content" : "You are InvestigateGPT, based on an activity plan, you generate 1-2 intriguing questions about each activity. Answer ONLY in concise bullet points."},
+inv = (
+    {
+        "role": "system",
+        "content": "You are InvestigateGPT, based on an activity plan, you generate 1-2 intriguing questions about each activity. Answer ONLY in concise bullet points.",
+    },
+)
 
-for k in all_primers.keys() :
-    
+for k in all_primers.keys():
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=all_primers[k],
@@ -168,8 +176,9 @@ final_response = respars.parse()
 
 with open("./lesson_plan.text", "w") as f:
     for k, v in final_response.items():
-        f.write(f"-----------------------------------------{k}-----------------------------------------")
+        f.write(
+            f"-----------------------------------------{k}-----------------------------------------"
+        )
         f.write("\n")
         f.write(v)
         f.write("\n")
-
