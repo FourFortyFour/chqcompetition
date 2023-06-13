@@ -42,7 +42,7 @@ class ApiHandler(Resource):
         return final_respone
 
 
-def gen_assess_and_reflection(query: str) -> list[str]:
+def gen_assess_and_reflection(query):
     assert api_key is not None, "no api key provided..."
     # print(api_key)
     # m = openai.Model.list()
