@@ -1,8 +1,10 @@
+from . import turbo_dict
 import openai
-import os
-from flask_restful import Resource, Api, reqparse
 
-api_key = os.environ.get("OPENAI_API_KEY")
+# import os
+from flask_restful import Resource, reqparse
+
+# api_key = os.environ.get("OPENAI_API_KEY")
 # print(api_key)
 
 ALIGNMENT_STR = """
@@ -20,9 +22,6 @@ It also encourages the teacher to reflect on whether there was enough differenti
 
 
 class ApiHandler(Resource):
-    def get(self):
-        return None
-
     def post(self):
         parser = reqparse.RequestParser()
         parser.add_argument(
@@ -31,13 +30,14 @@ class ApiHandler(Resource):
         # parser.add_argument("response", type=str)
 
         args = parser.parse_args()
+        # getting the query from post request
         query = args["query"]
         # request_json = args["response"]
         # ret_msg = request_json
         final_respone = {
             "resultStatus": "SUCCESS",
-            "message": query,
-            "response": gen_assess_and_reflection(query),
+            # "message": query,
+            "response": turbo_dict.get_lessonplan_dict(query),
         }
         return final_respone
 

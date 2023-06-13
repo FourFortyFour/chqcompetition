@@ -15,7 +15,7 @@ function App() {
     event.preventDefault();
     axios.post('http://localhost:5000/querygpt', { query: inputValue })
       .then(response => {
-        console.log("SUCCESS", response)
+        // console.log("SUCCESS", response)
         setGetMessage(response)
         setInputValue("")
       }).catch(error => {
@@ -38,7 +38,7 @@ function App() {
         <p>Lesson plan generator</p>
         <form onSubmit={handleSubmit}>
           <input type='text' value={inputValue} onChange={handleInputChange} />
-          <button type='submit'>Generate plan</button>
+          <button type='submit'>Generate lesson plan</button>
         </form>
         <div>{getMessage.status === 200 && getMessage.data ?
           <h3>{getMessage.data.response}</h3>
