@@ -102,6 +102,9 @@ ANSWER in concise bullet points, DO NOT include accompanying text."""},
 
 }
 
+inv = {"role" : "system", 
+       "content" : "You are InvestigateGPT, based on an activity plan, you generate 1-2 intriguing questions about each activity. Answer ONLY in concise bullet points."},
+
 for k in all_primers.keys() :
     
     response = openai.ChatCompletion.create(
