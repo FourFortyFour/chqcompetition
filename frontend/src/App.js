@@ -36,8 +36,7 @@ function App() {
         <p>Lesson plan generator</p>
         <input type='text' value={inputValue} onChange={handleInputChange} />
         <button onClick={handleSubmit}>Generate plan</button>
-
-        <div>{getMessage.status === 200 ?
+        <div>{getMessage.status === 200 && getMessage.data ?
           <h3>{getMessage.data.response}</h3>
           :
           <h3>LOADING</h3>}</div>
