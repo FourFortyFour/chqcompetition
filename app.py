@@ -1,8 +1,12 @@
 from flask import Flask
-import api.openai as oai
+from api import querygpt
+
+
 app = Flask(__name__)
-
-
 @app.route("/")
 def init():
+    shawarma()
     return "<p>Made with ❤️ by </p>"
+
+def shawarma():
+    print(querygpt.gen_assess_and_reflection("hello"))
