@@ -1,10 +1,13 @@
 import openai
 import os
+from flask_restful import Resource, Api, reqparse
 
 # api_key = os.environ.get("OPENAI_API_KEY")
-
-openai.api_key = api_key
-
+# api_key = "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"
+# api_key="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"
+api_key = "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"
+# openai.api_key = api_key
+print(api_key)
 
 ALIGNMENT_STR = """
 You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
@@ -19,6 +22,34 @@ whether it was at the right level, whether there were any issues, and whether th
 It also encourages the teacher to reflect on whether there was enough differentiation for students with different learning needs.
 """
 
+class ApiHandler(Resource):
+    def get(self):
+        return {
+            'resultStatus' : 'SUCCESS',
+            'message': 'Welcome to the API'
+        }
+    def post(self):
+        parser = reqparse.RequestParser()
+        parser.add_argument('query', required=True, type=str, help='query cannot be blank')
+        parser.add_argument('response', type=str)
+
+        args = parser.parse_args()
+        request_type = args['type']
+        request_json = args['response']
+
+        ret_msg = request_json
+        if ret_msg:
+            query = "{}".format(ret_msg)
+        else:
+            query = "No input provided"
+
+        final_respone = {
+            'resultStatus' : 'SUCCESS',
+            'message': query,
+            'response': gen_assess_and_reflection(query)
+        }
+        return final_respone
+
 
 def gen_assess_and_reflection(query: str) -> list[str]:
     assert api_key is not None, "no api key provided..."
@@ -29,17 +60,14 @@ def gen_assess_and_reflection(query: str) -> list[str]:
         {"role": "system", "content": f"{ALIGNMENT_STR}"},
         {"role": "user", "content": f"{query}"},
     ]
-
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-0301",
         messages=messages,
         temperature=0.8,
-        max_tokens=2000,
+        max_tokens=1000,
         n=1,
     )
-
     generated_texts = [
         choice.message["content"].strip() for choice in response["choices"]
     ]
-
-    return generated_texts
+    return "Insanely helpful response"
