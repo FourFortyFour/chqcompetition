@@ -21,10 +21,7 @@ It also encourages the teacher to reflect on whether there was enough differenti
 
 class ApiHandler(Resource):
     def get(self):
-        return {
-            "resultStatus": "SUCCESS",
-            "message": "",
-        }
+        return None
 
     def post(self):
         parser = reqparse.RequestParser()
