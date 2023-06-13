@@ -6,7 +6,7 @@ import os
 openai.api_key = api_key
 
 
-ALIIGNMENT_STR = """
+ALIGNMENT_STR = """
 You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
 The students are in the 7th grade. You will be given a topic for a lesson and must generate the following two parts for the lesson plan:
 
@@ -26,15 +26,15 @@ def gen_assess_and_reflection(query: str) -> list[str]:
     # m = openai.Model.list()
     # print([m['id'] for m in m['data'] if m['id'].startswith('gpt')])
     messages = [
-        {"role": "system", "content": f"{ALIIGNMENT_STR}"},
-        {"role": "user", "content": "who are you?"},
+        {"role": "system", "content": f"{ALIGNMENT_STR}"},
+        {"role": "user", "content": f"{query}"},
     ]
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo-0301",
         messages=messages,
-        prompt=query,
         temperature=0.8,
+        max_tokens=2000,
         n=1,
     )
 
