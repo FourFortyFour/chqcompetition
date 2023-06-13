@@ -3,20 +3,14 @@ from flask_restful import Api, Resource, reqparse
 from flask_cors import CORS
 from api import querygpt
 
-app = Flask(__name__, static_url_path='', static_folder='frontend/build')
+app = Flask(__name__, static_url_path="", static_folder="frontend/build")
 CORS(app)
 api = Api(app)
 
-@app.route("/", defaults={'path':''})
+
+@app.route("/", defaults={"path": ""})
 def serve(path):
-    return send_from_directory(app.static_folder,'index.html')
+    return send_from_directory(app.static_folder, "index.html")
+
 
 api.add_resource(querygpt.ApiHandler, "/querygpt")
-
-# def shawarma():
-#     # print(
-#     #     querygpt.gen_assess_and_reflection(
-#     #         "The topic is thermodynamics, how can you help me?"
-#     #     )
-#     # )
-#     return "super helpful response"

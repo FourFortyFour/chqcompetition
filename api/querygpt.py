@@ -3,7 +3,7 @@ import os
 from flask_restful import Resource, Api, reqparse
 
 api_key = os.environ.get("OPENAI_API_KEY")
-print(api_key)
+# print(api_key)
 
 ALIGNMENT_STR = """
 You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.

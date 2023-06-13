@@ -7,11 +7,12 @@ function App() {
   const [getMessage, setGetMessage] = useState({})
   const [inputValue, setInputValue] = useState("")
 
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value)
+  const handleInputChange = (onQuerySend) => {
+    setInputValue(onQuerySend.target.value)
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     axios.post('http://localhost:5000/querygpt', { query: inputValue })
       .then(response => {
         console.log("SUCCESS", response)
@@ -35,8 +36,10 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>Lesson plan generator</p>
-        <input type='text' value={inputValue} onChange={handleInputChange} />
-        <button onClick={handleSubmit}>Generate plan</button>
+        <form onSubmit={handleSubmit}>
+          <input type='text' value={inputValue} onChange={handleInputChange} />
+          <button type='submit'>Generate plan</button>
+        </form>
         <div>{getMessage.status === 200 && getMessage.data ?
           <h3>{getMessage.data.response}</h3>
           :
