@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Xahir was here !!!!
+          DigiSchool
         </a>
       </header>
     </div>
