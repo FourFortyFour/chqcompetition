@@ -1,17 +1,17 @@
-import './App.css';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import MyGrid from './components/BasicInfo';
-import VocabularyList from './components/VocabularyList';
-import LearningOutcomes from './components/LearningOutcomes';
-import Differentiation from './components/Differentiation';
-import EducatorSection from './components/EducatorSection';
-import LearningExperiences from './components/LearningExperiences';
+import "./App.css";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import MyGrid from "./components/BasicInfo";
+import VocabularyList from "./components/VocabularyList";
+import LearningOutcomes from "./components/LearningOutcomes";
+import Differentiation from "./components/Differentiation";
+import EducatorSection from "./components/EducatorSection";
+import LearningExperiences from "./components/LearningExperiences";
 
 function App() {
   const [fields, setFields] = useState({});
   const [success, setSuccess] = useState(false);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const learningExperiences = {
     prepare: fields.prepare,
@@ -29,11 +29,11 @@ function App() {
   const handleSubmit = (event) => {
     event.preventDefault();
     axios
-      .post('http://localhost:5000/querygpt', { query: inputValue })
+      .post("http://localhost:5000/querygpt", { query: inputValue })
       .then((response) => {
         setFields(response.data.response);
         setSuccess(true);
-        setInputValue('');
+        setInputValue("");
       })
       .catch((error) => {
         setSuccess(false);
@@ -43,16 +43,48 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Lesson plan generator</p>
+      <header className="App-header" style={{minHeight: success ? "10vh" : "100vh",}}>
+        <p
+          style={{
+            fontFamily: "DM Sans",
+            fontSize: "70px",
+            marginBottom: "1px",
+          }}
+        >
+          Lesson Planner
+        </p>
+        <p
+          style={{
+            fontFamily: "Ubuntu",
+            fontSize: "16px",
+            marginTop: "2px",
+            marginBottom: "40px",
+          }}
+        >
+          Create customized lessons easily with our AI powered generator
+        </p>
         {!success ? (
-          <form onSubmit={handleSubmit}>
-            <input type="text" value={inputValue} onChange={handleInputChange} />
-            <button type="submit">Generate lesson plan</button>
+          <form
+            onSubmit={handleSubmit}
+          >
+            <input
+              type="text"
+              className="css-input"
+              value={inputValue}
+              onChange={handleInputChange}
+              style={{marginBottom: '20px'}}
+              placeholder="Enter Lesson Title"
+            />
+            <div className="button-container">
+              <button onClick={handleSubmit} style={{ "--clr": "#abecee" }}>
+                <span>Generate Plan</span>
+                <i></i>
+              </button>
+            </div>
           </form>
         ) : null}
         <div>
-          {success ? <h3>{fields['lesson-title']}</h3> : <h3>LOADING</h3>}
+          {success ? <h3>{fields["lesson-title"]}</h3> : <h3>LOADING</h3>}
         </div>
       </header>
 
@@ -61,11 +93,17 @@ function App() {
           <div className="side-panel"></div>
           <div className="center-panel">
             <MyGrid data={fields}></MyGrid>
-            <VocabularyList words={fields['key-vocabulary'].split(',')}></VocabularyList>
-            <VocabularyList words={fields['supporting-materials']}></VocabularyList>
+            <VocabularyList
+              words={fields["key-vocabulary"].split(",")}
+            ></VocabularyList>
+            <VocabularyList
+              words={fields["supporting-materials"]}
+            ></VocabularyList>
             <LearningOutcomes outcomes={fields}></LearningOutcomes>
             <Differentiation differentiation={fields}></Differentiation>
-            <LearningExperiences learningExperiences={learningExperiences}></LearningExperiences>
+            <LearningExperiences
+              learningExperiences={learningExperiences}
+            ></LearningExperiences>
             <EducatorSection data={fields}></EducatorSection>
           </div>
           <div className="side-panel"></div>
