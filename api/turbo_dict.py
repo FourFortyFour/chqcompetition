@@ -6,7 +6,8 @@ from . import ResponseParser
 
 
 def get_lessonplan_dict(query):
-    openai.api_key = ""
+    openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
+    openai.api_key = "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"
     responses = []
 
     counter = 0
