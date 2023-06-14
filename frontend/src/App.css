@@ -5,19 +5,16 @@
     align-items: center;
     padding: 20px;
   }
-  
   .main-content {
     display: flex;
     justify-content: space-between;
     width: 100%;
   }
-  
   .side-panel {
     flex: 1;
     background-color: #ffffff;
     padding: 10px;
   }
-  
   .center-panel {
     flex: 3;
     padding: 10px;
@@ -180,4 +177,5 @@
       box-shadow: #27272c;
     }
   }
+  
   
