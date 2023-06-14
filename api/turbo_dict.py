@@ -6,8 +6,7 @@ from . import ResponseParser
 
 
 def get_lessonplan_dict(query):
-    openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = ""
     responses = []
 
     counter = 0
@@ -163,7 +162,7 @@ def get_lessonplan_dict(query):
             messages_inv = [inv[0], user_message_inv]
 
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo-0613",
+                model="gpt-3.5-turbo",
                 messages=messages_inv,
             )
 
@@ -186,16 +185,3 @@ def get_lessonplan_dict(query):
             f.write(f"\n")
 
     return final_response
-
-
-# with open("./lesson_plan.text", "w") as f:
-#     for k, v in final_response.items():
-#         print(v)
-#         print(f"type v: {type(v)}")
-#         exit(0)
-#         f.write(
-#             f"-----------------------------------------{k}-----------------------------------------"
-#         )
-#         f.write("\n")
-#         f.write(v)
-#         f.write("\n")

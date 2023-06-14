@@ -1,7 +1,7 @@
 import React from 'react';
 import './BasicInfo.css'
 
-const MyGrid = ({data}) => {
+const MyGrid = ({ data }) => {
   return (
     <div className="grid-container">
       <div id="lesson-title" className="grid-item">Lesson Title : {data["lesson-title"]}</div>
