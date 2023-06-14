@@ -12,7 +12,7 @@ from . import ResponseParser
 
 def get_lessonplan_dict(query):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = "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"
     responses = []
 
     counter = 0
@@ -53,7 +53,7 @@ def get_lessonplan_dict(query):
                 "content": """You are a specialist in accommodating the needs of individuals when teaching a lesson. You will be given a topic name and you will answer the following TWO questions ONLY, think through it step by step and ensure your responses follow the constraints given below:
     How will you modify the task for students needing additional support?
     How will you extend the task for students needing additional challenge?
-    You will answer concisely with 2-3 short bullet points, for only the two questions. Think through it step by step and ensure your responses follow the constraints given above.""",
+    You will answer concisely with 2-3 short bullet points, for only the two questions. NO NEW LINE AFTER A QUESTION""",
             },
             user_message,
         ],
