@@ -8,6 +8,22 @@ import Differentiation from './components/Differentiation';
 import EducatorSection from './components/EducatorSection';
 import LearningExperiences from './components/LearningExperiences';
 
+import html2pdf from 'html2pdf.js';
+
+
+
+function downloadPDF() {
+  const element = document.getElementById('page-to-pdf');
+  const opt = {
+    margin:       0.5,
+    filename:     'my-page.pdf',
+    image:        { type: 'jpeg', quality: 0.98 },
+    html2canvas:  { scale: 2 },
+    jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+  };
+
+  html2pdf().from(element).set(opt).save();
+}
 function App() {
   const [fields, setFields] = useState({});
   const [success, setSuccess] = useState(false);
@@ -38,9 +54,10 @@ function App() {
       });
   };
 
+
   return (
-    <div className="App">
-      <header className="App-header" style={{ minHeight: success ? "10vh" : "100vh", }}>
+    <div className="App" id="page-to-pdf">
+      <header className="App-header" style={{minHeight: success ? "10vh" : "100vh",}}>
         <p
           style={{
             fontFamily: "DM Sans",
@@ -50,6 +67,7 @@ function App() {
         >
           Lesson Planner
         </p>
+        {success ? <button onClick={() => downloadPDF()}>Download as PDF</button> : null}
         <p
           style={{
             fontFamily: "Ubuntu",
@@ -84,7 +102,11 @@ function App() {
           {success ? <h3>{fields["lesson-title"]}</h3> : null}
           {loader ?  <h3>LOADING</h3> : null}
         </div>
+        
       </header>
+
+      
+      
 
       {success ? (
         <div className="main-content">
