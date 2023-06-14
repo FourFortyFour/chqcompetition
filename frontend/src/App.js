@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import MyGrid from "./components/BasicInfo";
 import VocabularyList from "./components/VocabularyList";
@@ -17,9 +17,9 @@ function App() {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
+    await axios
       .post("http://localhost:5000/querygpt", { query: inputValue })
       .then((response) => {
         setFields(response.data.response);
@@ -37,12 +37,8 @@ function App() {
       <header className="App-header">
         <p>Lesson plan generator</p>
         {!success ? (
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={inputValue}
-              onChange={handleInputChange}
-            />
+          <form method='post' onSubmit={handleSubmit}>
+            <input type="text" value={inputValue} onChange={handleInputChange} />
             <button type="submit">Generate lesson plan</button>
           </form>
         ) : null}
