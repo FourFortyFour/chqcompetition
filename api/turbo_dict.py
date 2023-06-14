@@ -7,7 +7,7 @@ from . import ResponseParser
 
 def get_lessonplan_dict(query):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = "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"
     responses = []
 
     counter = 0
@@ -177,6 +177,14 @@ def get_lessonplan_dict(query):
     # print(responses)
     respars = ResponseParser.ResponseParser(responses)
     final_response = respars.parse()
+
+    with open("./lesson_plan.txt", "w") as f:
+        for ke, val in final_response.items():
+            f.write(f"--------------------{ke}--------------------")
+            f.write(f"\n")
+            f.write(f"{val}")
+            f.write(f"\n")
+
     return final_response
 
 

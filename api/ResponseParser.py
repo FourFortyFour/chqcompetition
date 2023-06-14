@@ -36,12 +36,12 @@ class ResponseParser:
         text = los
 
         # Split the text based on question headers
-        sentences = diff.split("\n")
+        sentences = los.split("\n")
         qs = ["knowledge", "skills", "understandings"]
         question_answer_dict = {}
         current_question = None
         curret_index = 0
-        qs = ["differentiation", "additional"]
+
         for sentence in sentences:
             if sentence.endswith('?'):
                 current_question = qs[curret_index]
