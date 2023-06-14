@@ -12,7 +12,6 @@ function App() {
   const [fields, setFields] = useState({});
   const [success, setSuccess] = useState(false);
   const [inputValue, setInputValue] = useState("");
-  const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
