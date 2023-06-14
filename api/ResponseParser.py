@@ -43,12 +43,12 @@ class ResponseParser:
         curret_index = 0
 
         for sentence in sentences:
-            if sentence.endswith('?'):
+            if sentence.endswith("?"):
                 current_question = qs[curret_index]
                 question_answer_dict[current_question] = []
                 curret_index += 1
             elif current_question is not None:
-                if sentence == '':
+                if sentence == "":
                     continue
                 question_answer_dict[current_question].append(sentence)
 
@@ -67,12 +67,12 @@ class ResponseParser:
         curret_index = 0
         qs = ["differentiation", "additional"]
         for sentence in sentences:
-            if sentence.endswith('?'):
+            if sentence.endswith("?"):
                 current_question = qs[curret_index]
                 question_answer_dict[current_question] = []
                 curret_index += 1
             elif current_question is not None:
-                if sentence == '':
+                if sentence == "":
                     continue
                 question_answer_dict[current_question].append(sentence)
 

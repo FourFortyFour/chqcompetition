@@ -40,7 +40,7 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header" style={{minHeight: success ? "10vh" : "100vh",}}>
+      <header className="App-header" style={{ minHeight: success ? "10vh" : "100vh", }}>
         <p
           style={{
             fontFamily: "DM Sans",
@@ -69,7 +69,7 @@ function App() {
               className="css-input"
               value={inputValue}
               onChange={handleInputChange}
-              style={{marginBottom: '20px'}}
+              style={{ marginBottom: '20px' }}
               placeholder="Enter Lesson Title"
             />
             <div className="button-container">
