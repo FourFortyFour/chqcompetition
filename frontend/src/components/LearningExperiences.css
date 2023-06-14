@@ -1,9 +1,16 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+
 .learning-experiences-carousel {
     width: 80%;
     margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   
   .learning-experiences-carousel .card {
     border-radius: 10px;
+    border: 1px solid black;
   }
+
+  
   
