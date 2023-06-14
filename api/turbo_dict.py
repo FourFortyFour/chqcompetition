@@ -7,7 +7,7 @@ from . import ResponseParser
 
 def get_lessonplan_dict(query):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = "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"
     responses = []
 
     counter = 0
@@ -23,7 +23,7 @@ def get_lessonplan_dict(query):
     Based on the user responses generate the following:
     1. Lesson title
     2.Subject : the general subject the topic is included in
-    3. Grade
+    3. Grade - any ONE between grade 1 and grade 10
     4. Duration (How long do you think the teacher should spend teaching the lesson just output the time)
     5.  Key Vocabulary - (Based on the Subject and Lesson title provided by the user generate Key Vocabulary that can be used when teaching the topic)
     6. Out of the following: Live Worksheets, Smart Board, Tablets, Video, Laptop, Microsoft Office, TDS LMS, Others. Suggest the minimal options which will help students
@@ -34,11 +34,11 @@ def get_lessonplan_dict(query):
         "LOs": [
             {
                 "role": "system",
-                "content": """You are a specialist learning outcome planner. You take in a topic name and give points for the following three questions ONLY, think through it step by step and ensure your responses follow the constraints given below:
+                "content": """You are a specialist learning outcome planner. You take in a topic name and give BRIEF points for the following three questions ONLY:
     What we want students to know about?
     We want students to become proficient in?
     We want students to understand the concepts of?
-    You MUST answer ONLY these three questions and you will answer concisely with a few bullet points. NO NEW LINE AFTER A QUESTION""",
+    You MUST answer ONLY these three questions and you will answer concisely with FEW SMALL bullet points. NO NEW LINE AFTER A QUESTION""",
             },
             user_message,
         ],
@@ -57,9 +57,9 @@ def get_lessonplan_dict(query):
                 "role": "system",
                 "content": """You are PrepareGPT which is a model which is focused on providing a lesson plan to 7th grade students based on the topic provided. So now PrepareGPT has to give answers without REPEATING any part of the question in the output in bullet points which answers the following questions (each question should be answered with only ONE bullet point without any numbering),
                 think through it step by step and ensure your responses follow the requirements given below:
-    - Introduce the topic to students which gives a general idea about what they are learning about in bullet points (preferably with links to pictures)
+    - Introduce the topic to students which gives a general idea about what they are learning about in 1 bullet point (preferably with links to pictures)
     - General Questions which assess the student's prior knowledge of the topic and also require them to explain it in their own way (provide SEPARATE bullet points for each answer to THIS question only)
-    - 2 or 3 questions asking them about everyday things which they might not know relating to the topic.""",
+    - 1 question asking them about everyday things which they might not know relating to the topic.""",
             },
             user_message,
         ],
@@ -149,7 +149,7 @@ def get_lessonplan_dict(query):
         responses.append(rp)
         counter += 1
 
-        # print(f"Done with query {counter}")
+        print(f"Done with query {counter}")
 
         if k == "Plan":
             # Dealing with the invesitgate
@@ -172,7 +172,7 @@ def get_lessonplan_dict(query):
             responses.append(rp)
             counter += 1
 
-        print(f"Done with query {counter}")
+            print(f"Done with query {counter}")
 
     # print(responses)
     respars = ResponseParser.ResponseParser(responses)
