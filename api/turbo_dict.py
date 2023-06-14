@@ -12,11 +12,11 @@ from . import ResponseParser
 
 def get_lessonplan_dict(query):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = ""
+    openai.api_key = "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"
     responses = []
 
     counter = 0
-    user_message = {"role": "user", "content": query}
+    user_message = {"role": "user", "content": f"I am teaching students about {query}"}
     all_primers = {
         "init": [
             {

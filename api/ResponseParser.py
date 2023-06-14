@@ -36,20 +36,23 @@ class ResponseParser:
         text = los
 
         # Split the text based on question headers
-        questions = text.split("\n\n")
+        sentences = diff.split("\n")
+        qs = ["knowledge", "skills", "understandings"]
+        question_answer_dict = {}
+        current_question = None
+        curret_index = 0
+        qs = ["differentiation", "additional"]
+        for sentence in sentences:
+            if sentence.endswith('?'):
+                current_question = qs[curret_index]
+                question_answer_dict[current_question] = []
+                curret_index += 1
+            elif current_question is not None:
+                if sentence == '':
+                    continue
+                question_answer_dict[current_question].append(sentence)
 
-        # Create a dictionary to store the responses
-        response_dict = {}
-        keys = ["knowledge", "skills", "understandings"]
-
-        # Iterate over the questions and extract the responses
-        for i, question in enumerate(questions):
-            lines = question.split("\n")
-            q = keys[i]  # Extract the question
-            responses_lo = lines[1:]  # Extract the responses
-            response_dict[q] = responses_lo
-
-        self.fields.update(response_dict)
+        self.fields.update(question_answer_dict)
 
         ##Differentiation
         diff = self.responses[2]
@@ -57,19 +60,23 @@ class ResponseParser:
         text = diff
 
         # Split the text based on question headers
-        questions = text.split("\n\n")
+        sentences = diff.split("\n")
 
-        # Create a dictionary to store the responses
-        response_dict = {}
-        keys = ["differentiation", "additional"]
-        # Iterate over the questions and extract the responses
-        for i, question in enumerate(questions):
-            lines = question.split("\n")
-            q = keys[i]  # Extract the question
-            responses_lo = lines[1:]  # Extract the responses
-            response_dict[q] = responses_lo
+        question_answer_dict = {}
+        current_question = None
+        curret_index = 0
+        qs = ["differentiation", "additional"]
+        for sentence in sentences:
+            if sentence.endswith('?'):
+                current_question = qs[curret_index]
+                question_answer_dict[current_question] = []
+                curret_index += 1
+            elif current_question is not None:
+                if sentence == '':
+                    continue
+                question_answer_dict[current_question].append(sentence)
 
-        self.fields.update(response_dict)
+        self.fields.update(question_answer_dict)
 
     def stage_3(
         self,
