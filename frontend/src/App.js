@@ -11,6 +11,8 @@ import LearningExperiences from './components/LearningExperiences';
 function App() {
   const [fields, setFields] = useState({});
   const [success, setSuccess] = useState(false);
+  const [clicked, setClicked] = useState(false);
+  const [loader, setLoader] = useState(false);
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
@@ -19,16 +21,20 @@ function App() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setClicked(true);
+    setLoader(true);
     await axios
       .post("http://localhost:5000/querygpt", { query: inputValue })
       .then((response) => {
         setFields(response.data.response);
         setSuccess(true);
         setInputValue("");
+        setLoader(false);
       })
       .catch((error) => {
         setSuccess(false);
         console.log(error);
+        setClicked(false);
       });
   };
 
@@ -67,15 +73,16 @@ function App() {
               placeholder="Enter Lesson Title"
             />
             <div className="button-container">
-              <button onClick={handleSubmit} style={{ "--clr": "#abecee" }}>
+              {!clicked ? <button onClick={handleSubmit} style={{ "--clr": "#abecee" }}>
                 <span>Generate Plan</span>
                 <i></i>
-              </button>
+              </button> : null}
             </div>
           </form>
         ) : null}
         <div>
-          {success ? <h3>{fields["lesson-title"]}</h3> : <h3>LOADING</h3>}
+          {success ? <h3>{fields["lesson-title"]}</h3> : null}
+          {loader ?  <h3>LOADING</h3> : null}
         </div>
       </header>
 
