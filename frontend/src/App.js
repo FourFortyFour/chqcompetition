@@ -1,34 +1,26 @@
-import "./App.css";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import MyGrid from "./components/BasicInfo";
-import VocabularyList from "./components/VocabularyList";
-import LearningOutcomes from "./components/LearningOutcomes";
-import Differentiation from "./components/Differentiation";
-import EducatorSection from "./components/EducatorSection";
-import LearningExperiences from "./components/LearningExperiences";
+import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import MyGrid from './components/BasicInfo';
+import VocabularyList from './components/VocabularyList';
+import LearningOutcomes from './components/LearningOutcomes';
+import Differentiation from './components/Differentiation';
+import EducatorSection from './components/EducatorSection';
+import LearningExperiences from './components/LearningExperiences';
 
 function App() {
   const [fields, setFields] = useState({});
   const [success, setSuccess] = useState(false);
   const [inputValue, setInputValue] = useState("");
-
-  const learningExperiences = {
-    prepare: fields.prepare,
-    plan: fields.plan,
-    investigate: fields.investigate,
-    apply: fields.apply,
-    connect: fields.connect,
-    evaluate: fields.evaluate,
-  };
+  const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
+    await axios
       .post("http://localhost:5000/querygpt", { query: inputValue })
       .then((response) => {
         setFields(response.data.response);
@@ -102,7 +94,14 @@ function App() {
             <LearningOutcomes outcomes={fields}></LearningOutcomes>
             <Differentiation differentiation={fields}></Differentiation>
             <LearningExperiences
-              learningExperiences={learningExperiences}
+              learningExperiences={{
+                prepare: fields.prepare,
+                plan: fields.plan,
+                investigate: fields.investigate,
+                apply: fields.apply,
+                connect: fields.connect,
+                evaluate: fields.evaluate,
+              }}
             ></LearningExperiences>
             <EducatorSection data={fields}></EducatorSection>
           </div>
