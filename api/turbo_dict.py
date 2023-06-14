@@ -11,7 +11,8 @@ from . import ResponseParser
 
 
 def get_lessonplan_dict(query):
-    openai.api_key = os.environ.get("OPENAI_API_KEY")
+    openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
+    openai.api_key = "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"
     responses = []
 
     counter = 0
@@ -42,7 +43,7 @@ def get_lessonplan_dict(query):
     What we want students to know about?
     We want students to become proficient in?
     We want students to understand the concepts of?
-    You will answer only these three questions and you will answer concisely with a few bullet points.""",
+    You MUST answer ONLY these three questions and you will answer concisely with a few bullet points. NO NEW LINE AFTER A QUESTION""",
             },
             user_message,
         ],
@@ -178,6 +179,7 @@ def get_lessonplan_dict(query):
 
             print(f"Done with query {counter}")
 
+    print(responses)
     respars = ResponseParser.ResponseParser(responses)
     final_response = respars.parse()
     return final_response
