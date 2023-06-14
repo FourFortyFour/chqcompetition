@@ -1,12 +1,14 @@
 .learning-outcomes-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 10px;
-  }
-  
-  .learning-outcomes-column {
-    border: 1px solid black;
-    border-radius: 5px;
-    padding: 10px;
-  }
-  
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 10px;
+}
+
+.learning-outcomes-column {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 10px;
+  overflow-wrap: break-word; /* Allow text to wrap within the input field */
+  overflow: scroll;
+}
+
