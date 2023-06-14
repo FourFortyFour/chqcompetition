@@ -1,4 +1,5 @@
 import React from 'react';
+import "./EducatorSection.css"
 
 const EducatorSection = ({ data }) => {
   return (

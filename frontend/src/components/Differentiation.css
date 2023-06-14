@@ -10,3 +10,13 @@
     padding: 10px;
   }
   
+  .differentiation-column ul {
+    list-style-type: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+  }
+  
+  .differentiation-column li {
+    margin-bottom: 10px;
+  }
+  
