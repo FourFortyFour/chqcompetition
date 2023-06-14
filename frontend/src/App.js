@@ -1,25 +1,26 @@
-import "./App.css";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import MyGrid from "./components/BasicInfo";
-import VocabularyList from "./components/VocabularyList";
-import LearningOutcomes from "./components/LearningOutcomes";
-import Differentiation from "./components/Differentiation";
-import EducatorSection from "./components/EducatorSection";
-import LearningExperiences from "./components/LearningExperiences";
+import './App.css';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import MyGrid from './components/BasicInfo';
+import VocabularyList from './components/VocabularyList';
+import LearningOutcomes from './components/LearningOutcomes';
+import Differentiation from './components/Differentiation';
+import EducatorSection from './components/EducatorSection';
+import LearningExperiences from './components/LearningExperiences';
 
 function App() {
   const [fields, setFields] = useState({});
   const [success, setSuccess] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    axios
+    await axios
       .post("http://localhost:5000/querygpt", { query: inputValue })
       .then((response) => {
         setFields(response.data.response);
@@ -34,16 +35,44 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Lesson plan generator</p>
+      <header className="App-header" style={{minHeight: success ? "10vh" : "100vh",}}>
+        <p
+          style={{
+            fontFamily: "DM Sans",
+            fontSize: "70px",
+            marginBottom: "1px",
+          }}
+        >
+          Lesson Planner
+        </p>
+        <p
+          style={{
+            fontFamily: "Ubuntu",
+            fontSize: "16px",
+            marginTop: "2px",
+            marginBottom: "40px",
+          }}
+        >
+          Create customized lessons easily with our AI powered generator
+        </p>
         {!success ? (
-          <form onSubmit={handleSubmit}>
+          <form
+            onSubmit={handleSubmit}
+          >
             <input
               type="text"
+              className="css-input"
               value={inputValue}
               onChange={handleInputChange}
+              style={{marginBottom: '20px'}}
+              placeholder="Enter Lesson Title"
             />
-            <button type="submit">Generate lesson plan</button>
+            <div className="button-container">
+              <button onClick={handleSubmit} style={{ "--clr": "#abecee" }}>
+                <span>Generate Plan</span>
+                <i></i>
+              </button>
+            </div>
           </form>
         ) : null}
         <div>

@@ -4,11 +4,6 @@ import openai
 import os
 from . import ResponseParser
 
-# openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-# openai.api_key = "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"
-# topic_name = "water cycle"
-# user_string = f"I am teaching students about the {topic_name}."
-
 
 def get_lessonplan_dict(query):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
@@ -154,7 +149,7 @@ def get_lessonplan_dict(query):
         responses.append(rp)
         counter += 1
 
-        print(f"Done with query {counter}")
+        # print(f"Done with query {counter}")
 
         if k == "Plan":
             # Dealing with the invesitgate
@@ -168,7 +163,7 @@ def get_lessonplan_dict(query):
             messages_inv = [inv[0], user_message_inv]
 
             response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
+                model="gpt-3.5-turbo-0613",
                 messages=messages_inv,
             )
 
@@ -177,9 +172,9 @@ def get_lessonplan_dict(query):
             responses.append(rp)
             counter += 1
 
-            print(f"Done with query {counter}")
+        print(f"Done with query {counter}")
 
-    print(responses)
+    # print(responses)
     respars = ResponseParser.ResponseParser(responses)
     final_response = respars.parse()
     return final_response
