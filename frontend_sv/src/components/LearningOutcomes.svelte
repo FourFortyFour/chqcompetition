@@ -22,9 +22,12 @@
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
+        margin: 2% 0;
     }
 
-    section {
-        height: 100%;
+    section {  
+        border: 1px solid black;
+        padding: 10px;
+        border-radius: 10px;
     }
 </style>
