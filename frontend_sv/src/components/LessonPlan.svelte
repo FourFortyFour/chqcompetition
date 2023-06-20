@@ -10,21 +10,35 @@
   import CarouselTest from "./CarouselTest.svelte";
 </script>
 
-
 <h1>{$planData["lesson-title"]}</h1>
-<BasicInfo></BasicInfo>
-<ListView title={"Vocabulary"} itemList={$planData["key-vocabulary"].split(" ")}></ListView>
-<ListView title={"Supporting Materials"} itemList={$planData["supporting-materials"]}></ListView>
-<LearningOutcomes></LearningOutcomes>
-<Differentiation></Differentiation>
-<LearningExperiences></LearningExperiences>
-<EducatorSection></EducatorSection>
+<BasicInfo />
 
+<h2>Vocabulary</h2>
+<main>
+  <ListView itemList={$planData["key-vocabulary"].split(" ")} />
+</main>
+
+<h2>Additional Materials</h2>
+<main>
+  <ListView itemList={$planData["supporting-materials"]} />
+</main>
+
+<LearningOutcomes />
+<Differentiation />
+<LearningExperiences />
+<EducatorSection />
 
 <style>
-    h1 {
-        margin-bottom: 20px;
-    }
+  h2 {
+    text-align: center;
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+
+  main {
+    border: 1px solid #000;
+    border-radius: 10px;
+    padding: 10px;
+  }
 </style>
-
-

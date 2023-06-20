@@ -1,8 +1,6 @@
 <script>
   import { onMount } from "svelte";
     import { planData } from "../store";
-
-    export let title;
     export let itemList;
 
     onMount(() => {
@@ -10,7 +8,6 @@
     })
 </script>
 
-<h2>{title}</h2>
 <main class="list">
     <ul>
         {#each 
@@ -21,9 +18,6 @@
 </main>
 
 <style>
-    h2 {
-        text-align: center;
-    }
 
     /* main {
         border: 1px solid #000;

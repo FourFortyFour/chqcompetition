@@ -1,6 +1,7 @@
 <script>
   import { planData } from "../store";
   import { Styles, Icon } from "sveltestrap";
+  import RegenButton from "./RegenButton.svelte";
   let gradeString = $planData["grade"].slice(-1);
   $: grade = parseInt(gradeString);
 </script>
@@ -19,7 +20,7 @@
     </div>
     <div class="grade-view">
         <p>Selected Grade : {grade}</p>
-        <button class="regen"><Icon name="arrow-repeat"></Icon></button>
+        <RegenButton handleClick={() => {}}></RegenButton>
     </div>
   </div>
   <div class="info-component">{$planData["duration"]}</div>
@@ -61,19 +62,5 @@
     /* width: 100%; */
     margin: 0 1px;
   }
-
-  .regen {
-    border-radius: 100%;
-    border: none;
-    color: greenyellow;
-    background-color: black;
-  }
-  .regen:hover {
-    border-radius: 100%;
-    border: none;
-    color: rgb(109, 181, 0);
-    background-color: rgb(32, 32, 32);
-  }
-
 
 </style>
