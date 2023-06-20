@@ -7,7 +7,7 @@ from . import ResponseParser
 
 def get_lessonplan_dict(query):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = ""
     responses = []
 
     counter = 0
@@ -66,7 +66,7 @@ def get_lessonplan_dict(query):
         "Plan": [
             {
                 "role": "system",
-                "content": """You are planGPT, given a topic you will give 3-4 activities that my students can undertake. I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. If the materials are not provided, assume only basic classroom stationery is present. Answer in concise bullet points.""",
+                "content": """You are planGPT, given a topic you will give ONLY 2 activity that my students can undertake. I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. If the materials are not provided, assume only basic classroom stationery is present. Answer in concise bullet points. NO ACCOMPANYING TEXT""",
             },
             user_message,
         ],
@@ -93,7 +93,7 @@ def get_lessonplan_dict(query):
         "Evaluate": [
             {
                 "role": "system",
-                "content": """Students have learned about the topic, and have done a variety of activities to help them learn. Now it's the end of the class and you are the one that can help me generate a reflective activity which answers these questions. REMEMBER at this point we are short of time and it has to be something simple.
+                "content": """Students have learned about the topic, and have done a variety of activities to help them learn. Now it's the end of the class and you must generate a reflective activity which answers these questions. REMEMBER at this point we are short of time and it has to be something simple.
     What did I learn about?
     What skills did I use?
     What important points did I learn?
@@ -109,7 +109,7 @@ def get_lessonplan_dict(query):
                 "content": """You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
      You will be given a topic for a lesson and must generate the following:
 
-    1. Educator assessment: This component is focused on how the teacher will assess what the students have learned.
+    Educator assessment: This component is focused on how the teacher will assess what the students have learned.
     This might involve quizzes, rubrics, or other forms of summative end-of-lesson assessments. For example, if the topic is the human skeleton,
     the educator might ask the students to take a quiz on the different bones in the body. ANSWER in concise bullet points, DO NOT include accompanying text.""",
             },
@@ -121,7 +121,7 @@ def get_lessonplan_dict(query):
                 "content": """You are an assistant for a teacher. You are helping the teacher come up with the best, most accurate, and most helpful assessment for a  class of student.
     You will be given a topic for a lesson and must generate the following:
 
-    1. Educator reflection: This component encourages the teacher to reflect on the content of the lesson,
+    Educator reflection: This component encourages the teacher to reflect on the content of the lesson,
     whether it was at the right level, whether there were any issues, and whether the pacing was appropriate.
     It also encourages the teacher to reflect on whether there was enough differentiation for students with different learning needs.
 
@@ -177,6 +177,7 @@ def get_lessonplan_dict(query):
     # print(responses)
     respars = ResponseParser.ResponseParser(responses)
     final_response = respars.parse()
+    print(responses)
 
     with open("./lesson_plan.txt", "w") as f:
         for ke, val in final_response.items():

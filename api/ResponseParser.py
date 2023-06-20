@@ -38,7 +38,11 @@ class ResponseParser:
         # Split the text based on question headers
         sentences = los.split("\n")
         qs = ["knowledge", "skills", "understandings"]
-        question_answer_dict = {}
+        question_answer_dict = {
+            "knowledge": [],
+            "skills": [],
+            "understandings": []
+        }
         current_question = None
         curret_index = 0
 

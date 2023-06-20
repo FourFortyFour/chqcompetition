@@ -1,12 +1,12 @@
 <script>
     import axios from 'axios'
-    import { planData, loading, success } from '../store';
+    import { planData, loading, success, error } from '../store';
 
     let query = "lesson topic";
 
     async function handleClick() {
         loading.set(true);
-
+        error.set(false);
         if (query === '' || query === "lesson topic") {
             alert("Please enter a topic")
             return
@@ -17,14 +17,16 @@
         try {
             //Make the request to the API
             const response = await axios.post("http://localhost:5000/querygpt", {query : query})
-            success.set(true);
             if (response) {
                 planData.set(response.data.response);
             }
+            success.set(true);
             console.log("Request successful")
             loading.set(false);
         } catch (e) {
             console.log(`Error: ${e.message}`);
+            error.set(true);
+            loading.set(false);
         }
         
 

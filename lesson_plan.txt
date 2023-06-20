@@ -1,0 +1,98 @@
+--------------------date--------------------
+NA
+--------------------teacher-name--------------------
+Mian Humayun
+--------------------supporting-materials--------------------
+['minimal-technology-options:-live-worksheets', 'smart-board']
+--------------------lesson-title--------------------
+Water Cycle
+--------------------subject--------------------
+Science
+--------------------grade--------------------
+3
+--------------------duration--------------------
+1 hour
+--------------------key-vocabulary--------------------
+Evaporation, Condensation, Precipitation, Transpiration, Runoff
+--------------------knowledge--------------------
+['- The water cycle is a continuous process that involves the movement of water on Earth and in the atmosphere', '- Water exists in three states: liquid, solid (ice), and gas (water vapor)', '- The sun drives the water cycle by causing water to evaporate from various sources']
+--------------------skills--------------------
+['- Describing each stage of the water cycle (evaporation, condensation, precipitation, and runoff)', '- Understanding that the water cycle is a closed system, meaning that water is constantly being recycled and reused', '- Identifying different sources of water that participate in the water cycle (e.g. oceans, rivers, lakes, groundwater)']
+--------------------understandings--------------------
+['- How changes in temperature and pressure affect the behavior of water ', '- The role of clouds in the water cycle and their different types (e.g. cumulus, stratus, cirrus)', '- The impact of human activities on the water cycle, such as pollution and depletion of water resources']
+--------------------differentiation--------------------
+['- Simplify the language used in the lesson and provide visual aids to make the content more accessible.', '- Provide hands-on activities where students can physically demonstrate the water cycle, such as using models or conducting experiments.']
+--------------------additional--------------------
+['- Encourage students to research more complex examples of the water cycle, such as the role of clouds in the process.', '- Have students create a visual representation or diagram of the entire water cycle, including all the steps involved and different types of water movements.']
+--------------------prepare--------------------
+- The water cycle is the continuous process of water moving from Earth’s surface to the atmosphere and back again. It involves evaporation, transpiration, condensation, precipitation, and runoff. 
+
+- Evaporation is the process by which water changes from a liquid to a gas or vapor and rises up into the atmosphere. 
+- Transpiration is the process by which plants release water vapor into the air from their leaves and stems.
+- Condensation is the process by which water vapor in the air cools and changes back into liquid droplets, forming clouds. 
+- Precipitation is any form of moisture that falls from the atmosphere to the ground, such as rain, snow, sleet, and hail. 
+- Runoff is the movement of water over Earth's surface, which can occur when the ground is saturated, or when the water cannot be absorbed quickly enough. 
+
+- Did you know that all the water on Earth today is the same water that has been here since the planet was formed? It has just been constantly recycled through the water cycle!
+--------------------plan--------------------
+Activity 1:
+- Draw and label a diagram of the water cycle
+- Use a poem, song, or rap to memorize and recall the order of the water cycle stages
+
+Activity 2:
+- Create a mini water cycle in a jar using sand, water, and a plastic bag
+- Write a paragraph on the significance of the water cycle for life on earth and ways to conserve water
+--------------------investigate--------------------
+Activity 1:
+- What are the four stages of the water cycle and what happens during each stage?
+- How does the water cycle contribute to the balance of ecosystems?
+
+Activity 2:
+- How do the materials and process used in the mini water cycle simulate the actual water cycle?
+- What are some innovative ways to conserve water in your local community and why are they important?
+--------------------apply--------------------
+1. Create a diagram of the water cycle and label the different stages and processes involved. 
+2. Have students conduct a simple experiment to demonstrate the water cycle, such as boiling water and collecting the condensation on a lid. 
+3. Play a game of Jeopardy where the categories relate to the different stages of the water cycle, and students must answer questions based on their knowledge of the topic. 
+4. Assign a creative writing assignment where students write a short story from the perspective of a water droplet going through the water cycle. 
+5. Watch a short video about the water cycle and have students summarize the different stages in their own words.
+--------------------connect--------------------
+Questions:
+1. How does the water cycle impact the availability of freshwater in my daily life?
+2. How does the water cycle affect the weather patterns in my region?
+3. How does the water cycle impact the agriculture and food production in my country?
+4. What is the role of humans in disrupting the water cycle and how can we mitigate its negative effects?
+5. What are some global issues related to the water cycle, such as droughts and floods, and how can we address them?
+
+Homework Activity:
+Ask students to create a diagram or visual representation of the water cycle and label the different stages and processes involved. Then, ask them to research and write a short paragraph on how the water cycle affects a specific aspect of their daily life or their local community, such as how it impacts the availability of drinking water or agriculture. Finally, ask them to brainstorm and share ways in which they can conserve water and help mitigate the negative effects humans have on the water cycle.
+--------------------evaluate--------------------
+Here is a simple reflective activity you can use to wrap up your class on the water cycle:
+
+1. Ask each student to write down one thing they learned about the water cycle during the class.
+
+2. Ask each student to identify one skill they used during the class such as taking notes, making observations, or asking questions.
+
+3. Have each student write down 3-4 important points they learned about the water cycle during the class.
+
+4. Ask each student to write down one thing they would like to learn about the water cycle or related topics.
+
+5. Ask each student to rate how well they organized their learning during the class on a scale of 1-5, with 1 being poorly organized and 5 being very well organized.
+
+6. Have each student identify one way they could improve their learning next time, such as paying closer attention, participating more actively, or asking more questions.
+
+7. Collect the students' responses and review them to see what areas might need more attention or to determine what activities were most effective in helping students learn about the water cycle.
+--------------------assessment--------------------
+Here are some possible options for educator assessment:
+
+- Diagram labeling: Provide students with a blank diagram of the water cycle and ask them to label each stage correctly.
+- Short answer questions: Write a series of questions that ask students to explain different aspects of the water cycle, such as "What causes evaporation?" or "What is precipitation?"
+- Experiment design: Have students design an experiment that demonstrates one aspect of the water cycle (such as evaporation or condensation) and write a brief report detailing their hypothesis, method, and results.
+- Illustration creation: Ask students to create an illustration or comic strip that shows the different stages of the water cycle and gives a brief explanation of each one.
+- Data analysis: Give students a set of data related to the water cycle (such as precipitation measurements in different locations over time), and ask them to analyze and interpret the data to draw conclusions about the water cycle in that area.
+--------------------reflect--------------------
+Educator Reflection:
+- Was the lesson appropriately leveled for the students?
+- Were there any issues during the lesson that may have hindered student learning?
+- Was the pacing of the lesson appropriate for the students?
+- Were there enough differentiation strategies incorporated for students with different learning needs?
