@@ -87,6 +87,7 @@ class ResponseParser:
     ):
         les = [
             "prepare",
+            "investigate",
             "apply",
             "connect",
             "evaluate",
@@ -94,7 +95,7 @@ class ResponseParser:
             "reflect",
         ]
 
-        les_keys = ["Prepare", "Apply", "Improvement", "Connect", "Evaluate", "Assessment"]
+        les_keys = ["Prepare", "Investigate", "Apply", "Improvement", "Connect", "Evaluate", "Assessment"]
 
         for i in range(len(les)):
             self.fields[les[i]] = self.responses[les_keys[i]]

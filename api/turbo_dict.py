@@ -5,7 +5,7 @@ import openai
 
 def make_query(args):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = "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"
     k, all_primers = args
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -17,7 +17,7 @@ def make_query(args):
 
 def get_lessonplan_dict(query):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = "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"
     responses = {}
     counter = 0
     user_message = {"role": "user", "content": f"I am teaching students about {query}"}
@@ -85,7 +85,7 @@ The question?
                 "content": r"""You are planGPT, given a topic you will give ONLY 2 activity that my students can undertake. 
                 I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. 
                             Answer in concise bullet non-numbered points. NO ACCOMPANYING TEXT
-                            FOLLOW THE GIVEN FORMAT:
+                            FOLLOW THE GIVEN FORMAT EXCLUDE THE BRACES:
                             {
                             Activity No:
                             Duration: estimated duration
@@ -157,12 +157,11 @@ The question?
         ],
     }
     query_keys = list(all_primers.keys())
-    inv = (
-        {
+    inv = {
             "role": "system",
             "content": "You are InvestigateGPT, based on an activity plan, you generate 1-2 intriguing questions about each activity. Answer ONLY in concise bullet points.",
         },
-    )
+    
     queries = [(k, all_primers) for k in query_keys]
     
     print("trying multiprocessing...")
@@ -170,6 +169,16 @@ The question?
         result = pool.map(make_query, queries)
 
         responses = {key:res for key, res in result}
+
+        #Time to do investigate
+        rp = responses["Plan"]
+        user_message_inv = {
+                "role": "user",
+                "content": f"Here are the activities {rp}",
+            }
+        args = ("Investigate", {"Investigate" : [inv[0], user_message_inv]})
+        result_investigate = make_query(args)
+        responses["Investigate"] = result_investigate[1]
         print("done with all requests")
         # Done with all requests, now parsing the responses
         respars = ResponseParser.ResponseParser(responses)
