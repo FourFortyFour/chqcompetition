@@ -6,7 +6,7 @@ class ResponseParser:
     def stage_1(
         self,
     ):
-        ini = self.responses[0]
+        ini = self.responses["init"]
         splitup = ini.split("\n")
         splitup_2 = [ans[3:] for ans in splitup]
         meds = [
@@ -31,7 +31,7 @@ class ResponseParser:
     def stage_2(
         self,
     ):
-        los = self.responses[1]
+        los = self.responses["LOs"]
 
         text = los
 
@@ -59,7 +59,7 @@ class ResponseParser:
         self.fields.update(question_answer_dict)
 
         ##Differentiation
-        diff = self.responses[2]
+        diff = self.responses["Differentiation"]
 
         text = diff
 
@@ -87,8 +87,6 @@ class ResponseParser:
     ):
         les = [
             "prepare",
-            "plan",
-            "investigate",
             "apply",
             "connect",
             "evaluate",
@@ -96,8 +94,10 @@ class ResponseParser:
             "reflect",
         ]
 
-        for i in range(3, 11):
-            self.fields[les[i - 3]] = self.responses[i]
+        les_keys = ["Prepare", "Apply", "Improvement", "Connect", "Evaluate", "Assessment"]
+
+        for i in range(len(les)):
+            self.fields[les[i]] = self.responses[les_keys[i]]
 
     def parse(
         self,

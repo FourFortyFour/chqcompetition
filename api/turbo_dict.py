@@ -1,15 +1,24 @@
+from multiprocessing import Pool, Process
+from . import ResponseParser
 import openai
 
-# from bs4 import BeautifulSoup
-import os
-from . import ResponseParser
 
+def make_query(args):
+    openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
+    openai.api_key = "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"
+    k, all_primers = args
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo",
+        messages=all_primers[k],
+    )
+    rp = response["choices"][0]["message"]["content"]
+    print(f"Done with query: {k}")
+    return (k, rp) 
 
 def get_lessonplan_dict(query):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = ""
-    responses = []
-
+    openai.api_key = "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"
+    responses = {}
     counter = 0
     user_message = {"role": "user", "content": f"I am teaching students about {query}"}
     all_primers = {
@@ -45,10 +54,17 @@ def get_lessonplan_dict(query):
         "Differentiation": [
             {
                 "role": "system",
-                "content": """You are a specialist in accommodating the needs of individuals when teaching a lesson. You will be given a topic name and you will answer the following TWO questions ONLY, think through it step by step and ensure your responses follow the constraints given below:
+                "content": r"""You are a specialist in accommodating the needs of individuals when teaching a lesson. You will be given a topic name and you will answer the following TWO questions ONLY:
     How will you modify the task for students needing additional support?
     How will you extend the task for students needing additional challenge?
-    You will answer concisely with 2-3 short bullet points, for only the two questions. NO NEW LINE AFTER A QUESTION""",
+    You will answer concisely with 2-3 short bullet points, for only the two questions. NO NEW LINE AFTER A QUESTION
+FOLLOW THE GIVEN FORMAT:
+{
+The question?
+`No new line`
+-point for question * n
+\n\n
+}""",
             },
             user_message,
         ],
@@ -66,7 +82,17 @@ def get_lessonplan_dict(query):
         "Plan": [
             {
                 "role": "system",
-                "content": """You are planGPT, given a topic you will give ONLY 2 activity that my students can undertake. I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. If the materials are not provided, assume only basic classroom stationery is present. Answer in concise bullet points. NO ACCOMPANYING TEXT""",
+                "content": r"""You are planGPT, given a topic you will give ONLY 2 activity that my students can undertake. 
+                I want coherent activities that build on one another, and an IMPORTANT consideration is the duration and materials. 
+                            Answer in concise bullet non-numbered points. NO ACCOMPANYING TEXT
+                            FOLLOW THE GIVEN FORMAT:
+                            {
+                            Activity No:
+                            Duration: estimated duration
+                            Materials: materials needed
+                            Steps: bullet point steps non-numbered
+                            \n\n
+                            }""",
             },
             user_message,
         ],
@@ -130,60 +156,30 @@ def get_lessonplan_dict(query):
             user_message,
         ],
     }
-
+    query_keys = list(all_primers.keys())
     inv = (
         {
             "role": "system",
             "content": "You are InvestigateGPT, based on an activity plan, you generate 1-2 intriguing questions about each activity. Answer ONLY in concise bullet points.",
         },
     )
-    for k in all_primers.keys():
-        all_primers[k][1] = user_message
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=all_primers[k],
-        )
+    queries = [(k, all_primers) for k in query_keys]
+    
+    print("trying multiprocessing...")
+    with Pool(processes=len(query_keys)) as pool:
+        result = pool.map(make_query, queries)
 
-        rp = response["choices"][0]["message"]["content"]
+        responses = {key:res for key, res in result}
+        print("done with all requests")
+        # Done with all requests, now parsing the responses
+        respars = ResponseParser.ResponseParser(responses)
+        final_response = respars.parse()
 
-        responses.append(rp)
-        counter += 1
+    # with open("./lesson_plan.txt", "w") as f:
+    #     for ke, val in final_response.items():
+    #         f.write(f"--------------------{ke}--------------------")
+    #         f.write(f"\n")
+    #         f.write(f"{val}")
+    #         f.write(f"\n")
 
-        print(f"Done with query {counter}")
-
-        if k == "Plan":
-            # Dealing with the invesitgate
-            k = "Investigate"
-
-            user_message_inv = {
-                "role": "user",
-                "content": f"Here are the activities {rp}",
-            }
-
-            messages_inv = [inv[0], user_message_inv]
-
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo",
-                messages=messages_inv,
-            )
-
-            rp = response["choices"][0]["message"]["content"]
-
-            responses.append(rp)
-            counter += 1
-
-            print(f"Done with query {counter}")
-
-    # print(responses)
-    respars = ResponseParser.ResponseParser(responses)
-    final_response = respars.parse()
-    print(responses)
-
-    with open("./lesson_plan.txt", "w") as f:
-        for ke, val in final_response.items():
-            f.write(f"--------------------{ke}--------------------")
-            f.write(f"\n")
-            f.write(f"{val}")
-            f.write(f"\n")
-
-    return final_response
+        return final_response
