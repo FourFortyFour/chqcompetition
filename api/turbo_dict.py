@@ -5,7 +5,7 @@ import openai
 
 def make_query(args):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = "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"
     k, all_primers = args
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
