@@ -47,7 +47,7 @@ class ResponseParser:
         curret_index = 0
 
         for sentence in sentences:
-            if sentence.endswith("?"):
+            if sentence.endswith("?") or sentence.endswith(":"):
                 current_question = qs[curret_index]
                 question_answer_dict[current_question] = []
                 curret_index += 1
@@ -71,7 +71,7 @@ class ResponseParser:
         curret_index = 0
         qs = ["differentiation", "additional"]
         for sentence in sentences:
-            if sentence.endswith("?"):
+            if sentence.endswith("?") or sentence.endswith(":"):
                 current_question = qs[curret_index]
                 question_answer_dict[current_question] = []
                 curret_index += 1
