@@ -5,7 +5,7 @@ import openai
 
 def make_query(args):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
-    openai.api_key = "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"
+    openai.api_key = ""
     k, all_primers = args
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
@@ -15,12 +15,16 @@ def make_query(args):
     print(f"Done with query: {k}")
     return (k, rp) 
 
-def get_lessonplan_dict(query):
+def get_lessonplan_dict(query, grade=None):
     openai.organization = "org-6Y0egc5JCH2jG3EWpd3JarW7"
     openai.api_key = "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"
     responses = {}
     counter = 0
-    user_message = {"role": "user", "content": f"I am teaching students about {query}"}
+    if grade is None:
+        user_message = {"role": "user", "content": f"I am teaching students about {query}"}
+    else:
+        user_message = {"role": "user", "content": f"I am teaching students of {grade} about {query}. Curate complexity according to the grade level."}
+    print(user_message)
     all_primers = {
         "init": [
             {
@@ -32,7 +36,7 @@ def get_lessonplan_dict(query):
     Based on the user responses generate the following:
     1. Lesson title
     2.Subject : the general subject the topic is included in
-    3. Grade - any ONE between grade 1 and grade 10
+    3. Grade - between grade 1 and grade 12, format : Grade N
     4. Duration (How long do you think the teacher should spend teaching the lesson just output the time)
     5.  Key Vocabulary - (Based on the Subject and Lesson title provided by the user generate Key Vocabulary that can be used when teaching the topic)
     6. Out of the following: Live Worksheets, Smart Board, Tablets, Video, Laptop, Microsoft Office, TDS LMS, Others. Suggest the minimal options which will help students
@@ -164,7 +168,7 @@ The question?
     
     queries = [(k, all_primers) for k in query_keys]
     
-    print("trying multiprocessing...")
+
     with Pool(processes=len(query_keys)) as pool:
         result = pool.map(make_query, queries)
 
@@ -184,11 +188,11 @@ The question?
         respars = ResponseParser.ResponseParser(responses)
         final_response = respars.parse()
 
-    # with open("./lesson_plan.txt", "w") as f:
-    #     for ke, val in final_response.items():
-    #         f.write(f"--------------------{ke}--------------------")
-    #         f.write(f"\n")
-    #         f.write(f"{val}")
-    #         f.write(f"\n")
+        with open("./lesson_plan.txt", "w") as f:
+            for ke, val in final_response.items():
+                f.write(f"--------------------{ke}--------------------")
+                f.write(f"\n")
+                f.write(f"{val}")
+                f.write(f"\n")
 
         return final_response

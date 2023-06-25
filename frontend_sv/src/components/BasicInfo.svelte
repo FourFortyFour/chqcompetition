@@ -1,9 +1,36 @@
 <script>
-  import { planData } from "../store";
+  import { planData, loading, success, error } from "../store";
   import { Styles, Icon } from "sveltestrap";
   import RegenButton from "./RegenButton.svelte";
-  let gradeString = $planData["grade"].slice(-1);
+  import axios from "axios";
+  let gradeString = $planData["grade"].split(" ")[1];
   $: grade = parseInt(gradeString);
+
+  async function regenLessonPlan() {
+
+    let query = $planData["lesson-title"];
+    const gradeQ = "Grade " + grade
+    success.set(false);
+    loading.set(true);
+    try {
+            //Make the request to the API
+            const response = await axios.post("http://localhost:5000/querygpt", 
+            {
+              query : query,
+              grade : gradeQ
+            })
+            if (response) {
+                planData.set(response.data.response);
+            }
+            success.set(true);
+            console.log("Request successful")
+            loading.set(false);
+        } catch (e) {
+            console.log(`Error: ${e.message}`);
+            error.set(true);
+            loading.set(false);
+        }
+  }
 </script>
 
 <Styles />
@@ -20,7 +47,7 @@
     </div>
     <div class="grade-view">
         <p>Selected Grade : {grade}</p>
-        <RegenButton handleClick={() => {}}></RegenButton>
+        <RegenButton handleClick={regenLessonPlan}></RegenButton>
     </div>
   </div>
   <div class="info-component">{$planData["duration"]}</div>

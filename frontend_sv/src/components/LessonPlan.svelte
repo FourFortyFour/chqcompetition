@@ -15,7 +15,7 @@
 
 <h2>Vocabulary</h2>
 <main>
-  <ListView itemList={$planData["key-vocabulary"].split(" ")} />
+  <ListView itemList={$planData["key-vocabulary"].split(",")} />
 </main>
 
 <h2>Additional Materials</h2>

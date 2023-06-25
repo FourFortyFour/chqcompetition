@@ -5,7 +5,6 @@
 
   $: carItems = [
     $planData["prepare"],
-    $planData["plan"],
     $planData["investigate"],
     $planData["apply"],
     $planData["connect"],
